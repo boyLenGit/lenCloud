@@ -1,4 +1,4 @@
-package len.test.redis.config;
+package len.cloud02.cloudserver.config;
 
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
