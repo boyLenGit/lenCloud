@@ -1,5 +1,6 @@
 package len.cloud02.blog_service.mapper;
 
+import len.cloud02.blog_service.entity.Blog;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -8,4 +9,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface BlogMapper {
+    Blog getBlogById(Long id);
 }
