@@ -7,4 +7,12 @@
     <select id="getBlogById" resultType="len.cloud02.blog_service.entity.Blog">
         SELECT * FROM blog WHERE id = #{id}
     </select>
+
+    <select id="getBlogListByPage" resultType="len.cloud02.blog_service.entity.Blog">
+        SELECT * FROM blog WHERE 1=1 LIMIT #{startIndex}, #{pageSize}
+    </select>
+
+    <select id="countBlogListForPage" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM blog WHERE 1=1
+    </select>
 </mapper>

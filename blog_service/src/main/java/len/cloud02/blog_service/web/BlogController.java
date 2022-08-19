@@ -24,4 +24,10 @@ public class BlogController {
     public JSONObject getBlogById(@RequestParam(required = true)Long id){
         return blogService.getBlogById(id);
     }
+
+    @GetMapping("/getListByPage")
+    public JSONObject getBlogListByPage(@RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum,
+                                        @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize){
+        return blogService.getBlogListByPage(pageNum-1, pageSize);
+    }
 }
