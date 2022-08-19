@@ -52,7 +52,8 @@ public class HttpClientUtils {
             StringEntity stringEntity=new StringEntity(json, ContentType.APPLICATION_JSON);
             httpPost.setEntity(stringEntity);
             response = httpClient.execute(httpPost);
-            if (response != null && response.getStatusLine().getStatusCode() == 200) {
+//            if (response != null && response.getStatusLine().getStatusCode() == 200) {  // 判断stateCode会导致错误信息不返回
+            if (response != null) {
                 HttpEntity entity = response.getEntity();
                 String jsonString= EntityUtils.toString(entity);
                 JSONObject jsonObject = JSONObject.parseObject(jsonString);
