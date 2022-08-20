@@ -34,4 +34,8 @@ public class Blog {
     private Long typeId;
 
     private Long userId;
+
+    private String userName;
+
+    private String userEmail;
 }

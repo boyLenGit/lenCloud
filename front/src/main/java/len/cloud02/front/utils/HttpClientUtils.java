@@ -125,6 +125,20 @@ public class HttpClientUtils {
         return null;
     }
 
+    public static String urlAddParams(String url, Map<?, ?> map){
+        StringBuilder paramTemp = new StringBuilder("");
+        if (map != null){
+            paramTemp.append("?");
+            for (Object key: map.keySet()){
+                if (paramTemp.length()>1){
+                    paramTemp.append("&");
+                }
+                paramTemp.append(key).append("=").append(map.get(key).toString());
+            }
+        }
+        return url+paramTemp;
+    }
+
     public static void main(String[] args) {
         // 示例：纯Get无参数请求
         JSONObject jsonObject = get("http://127.0.0.1:12003/server/json/getlist", null, null);

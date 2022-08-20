@@ -4,7 +4,10 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import len.cloud02.front.entity.Blog;
 import len.cloud02.front.utils.HttpClientUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,14 +19,20 @@ import java.util.Map;
  */
 @Service
 public class IndexService {
-    public List<Blog> getBlogList(Integer pageNum, Integer pageSize){
-//        String url = "http://blog_service/blog/getListByPage";
-        String url = "http://localhost:12004/blog/getListByPage";
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @Value("${boyLen_blogService_url}")
+    private String blogServiceUrl;
+
+    public JSONObject getBlogList(Integer pageNum, Integer pageSize){
+        // 生成URL
+        String url = blogServiceUrl + "/blog/getListByPage";
         Map<String, String> map = new HashMap<>();
         map.put("pageNum", String.valueOf(pageNum));
         map.put("pageSize", String.valueOf(pageSize));
-        JSONObject jsonObject = HttpClientUtils.get(url, map, null);
-        JSONArray jsonArray = jsonObject.getJSONArray("list");
-        return jsonArray.toJavaList(Blog.class);
+        url = HttpClientUtils.urlAddParams(url, map);
+        // 处理结果
+        return restTemplate.getForObject(url, JSONObject.class);
     }
 }
