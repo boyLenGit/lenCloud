@@ -17,7 +17,8 @@ import java.util.Map;
 @Service
 public class IndexService {
     public List<Blog> getBlogList(Integer pageNum, Integer pageSize){
-        String url = "http://blog_service/blog/getListByPage";
+//        String url = "http://blog_service/blog/getListByPage";
+        String url = "http://localhost:12004/blog/getListByPage";
         Map<String, String> map = new HashMap<>();
         map.put("pageNum", String.valueOf(pageNum));
         map.put("pageSize", String.valueOf(pageSize));
