@@ -38,24 +38,24 @@ public class HttpClientUtils {
      */
     public static JSONObject post(String url, Object body, Map<String, String> headerMap) {
         //获取json字符串
-        String json= JSON.toJSONString(body);
+        String json = JSON.toJSONString(body);
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost(url);
         // 配置post的请求头Header
-        if (headerMap != null && headerMap.size() != 0){
-            for (String item: headerMap.keySet()){
+        if (headerMap != null && headerMap.size() != 0) {
+            for (String item : headerMap.keySet()) {
                 httpPost.setHeader(item, headerMap.get(item));
             }
         }
         CloseableHttpResponse response;
         try {
-            StringEntity stringEntity=new StringEntity(json, ContentType.APPLICATION_JSON);
+            StringEntity stringEntity = new StringEntity(json, ContentType.APPLICATION_JSON);
             httpPost.setEntity(stringEntity);
             response = httpClient.execute(httpPost);
 //            if (response != null && response.getStatusLine().getStatusCode() == 200) {  // 判断stateCode会导致错误信息不返回
             if (response != null) {
                 HttpEntity entity = response.getEntity();
-                String jsonString= EntityUtils.toString(entity);
+                String jsonString = EntityUtils.toString(entity);
                 JSONObject jsonObject = JSONObject.parseObject(jsonString);
                 return jsonObject;
             }
@@ -85,12 +85,12 @@ public class HttpClientUtils {
         try {
             // 配置get参数Param
             URI uri;
-            if (paramMap == null || paramMap.size() == 0){
+            if (paramMap == null || paramMap.size() == 0) {
                 uri = new URI(url);
-            }else {
+            } else {
                 List<NameValuePair> pairs = new ArrayList<>();
-                for(Map.Entry<String,String> entry:paramMap.entrySet()){
-                    pairs.add(new BasicNameValuePair(entry.getKey(),entry.getValue()));
+                for (Map.Entry<String, String> entry : paramMap.entrySet()) {
+                    pairs.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
                 }
                 URIBuilder builder = new URIBuilder(url).setParameters(pairs);
                 uri = builder.build();
@@ -98,16 +98,16 @@ public class HttpClientUtils {
             // 生成HttpGet对象
             HttpGet httpGet = new HttpGet(uri);
             // 配置get的请求头Header
-            if (headerMap != null && headerMap.size() != 0){
-                for (String item: headerMap.keySet()){
+            if (headerMap != null && headerMap.size() != 0) {
+                for (String item : headerMap.keySet()) {
                     httpGet.setHeader(item, headerMap.get(item));
                 }
             }
             // 执行Get请求
             CloseableHttpResponse response = httpClient.execute(httpGet);
-            if(response != null && response.getStatusLine().getStatusCode() == 200) {
+            if (response != null && response.getStatusLine().getStatusCode() == 200) {
                 HttpEntity entity = response.getEntity();
-                String jsonString= EntityUtils.toString(entity);
+                String jsonString = EntityUtils.toString(entity);
                 JSONObject jsonObject = JSONObject.parseObject(jsonString);
                 return jsonObject;
             }
