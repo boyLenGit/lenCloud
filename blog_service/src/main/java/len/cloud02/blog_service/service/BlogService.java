@@ -34,7 +34,7 @@ public class BlogService {
         result.put("list", blogList);
         result.put("pageNum", pageNum);
         result.put("pageSize", pageSize);
-        result.put("pages", total / pageSize);
+        result.put("pages", (total / pageSize) + 1);
         result.put("size", blogList.size());
         result.put("total", total);
         return result;

@@ -37,7 +37,9 @@ public class Blog {
 
     private Long userId;
 
-    private String userName;
+    private String username;
 
     private String userEmail;
+
+    private String userAvatar;
 }
