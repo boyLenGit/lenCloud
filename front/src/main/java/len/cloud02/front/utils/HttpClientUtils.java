@@ -2,6 +2,7 @@ package len.cloud02.front.utils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import len.cloud02.front.entity.Param;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -137,6 +138,20 @@ public class HttpClientUtils {
             }
         }
         return url+paramTemp;
+    }
+
+    public static String paramsToUrl(Param... params){
+        StringBuilder paramUrl = new StringBuilder("");
+        if (params.length != 0){
+            paramUrl.append("?");
+            for (Param param: params){
+                if (paramUrl.length()>1){
+                    paramUrl.append("&");
+                }
+                paramUrl.append(param.getName()).append("=").append(param.getBody().toString());
+            }
+        }
+        return paramUrl.toString();
     }
 
     public static void main(String[] args) {
